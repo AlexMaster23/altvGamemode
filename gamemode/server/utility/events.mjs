@@ -71,7 +71,7 @@ alt.on('entityEnterColshape', (colshape, entity) => {
             {
                 if(working === true)
                 {
-                    alt.emit('trucker:arriveDestination', 'MazeBank' ,player);
+                    alt.emit('trucker:arriveDestination',player, 'MazeBank');
                     alt.emit('cp:deleteCheckpoint', player);
                 }
                 else
@@ -82,6 +82,10 @@ alt.on('entityEnterColshape', (colshape, entity) => {
             if(colshape.name === 'CheckpointColshape')
             {
                 chat.sendInfo(entity, `Ai ajuns la checkpoint!`);
+                alt.emit('cp:deleteCheckpoint', player);
+            }
+            if(colshape.name === 'GPS Location')
+            {
                 alt.emit('cp:deleteCheckpoint', player);
             }
         }
@@ -112,3 +116,17 @@ alt.on('entityLeaveColshape', (colshape, entity) =>
     }
 
 });
+
+
+alt.on('playerEnteredVehicle', (player, vehicle, seat) => {
+    alt.emitClient(player, 'speedo:playerEnterVehicle', vehicle, seat);
+    console.log("Player Entered Vehicle (" + seat + ")");
+  });
+  
+  alt.on('playerLeftVehicle', (player, vehicle, seat) => {
+    alt.emitClient(player, 'speedo:playerLeftVehicle', seat);
+  });
+
+  alt.on('playerChangedVehicleSeat', (player, vehicle, oldSeat, newSeat) => {
+    alt.emitClient(player, 'speedo:playerChangedVehicleSeat', vehicle, newSeat);
+  });

@@ -1,0 +1,316 @@
+@dark: #141414e0;
+@light: #d7e1e5;
+@contrast1: rgb(0, 217, 255);
+@contrast2: #00ff40;
+@darkaccent: rgb(8, 8, 8);
+@fontface: 'Roboto';
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: @fontface;
+}
+
+.context-menu {
+    display: block;
+    position: fixed;
+    background: @dark;
+    font-family: @fontface;
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    z-index: 99;
+
+    .option {
+        color: @light;
+        width: 100%;
+        padding-top: 5px;
+        padding-left: 5px;
+        height: 25px;
+        max-height: 25px;
+        user-select: none;
+    }
+
+    .option:hover {
+        background: @darkaccent;
+        color: @contrast1;
+    }
+
+    .title {
+        padding: 5px;
+        color: @contrast2;
+        max-height: 25px;
+        user-select: none;
+    }
+}
+
+.weather {
+    user-select: none;
+    position: fixed;
+    top: 66px;
+
+    svg {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.txt {
+    position: fixed;
+    color: white;
+    opacity: 0.45;
+    top: 1px;
+    text-align: center;
+    width: 50%;
+    left: 25%;
+    font-size: 9px;
+}
+
+.hudpanel {
+    user-select: none;
+    position: fixed;
+    display: flex;
+    right: 20px;
+    top: 100px;
+    background: transparent;
+    transform: skew(-20deg);
+    padding: 5px;
+    width: auto;
+    max-width: 400px;
+    max-height: 29px;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    .cash {
+        padding: 0px 20px;
+        transform: skew(20deg);
+        text-align: right;
+        color: @contrast2;
+        min-width: 100px;
+        text-shadow: 1px 1px black;
+        font-size: 20px;
+    }
+}
+
+.clockbox {
+    user-select: none;
+    position: fixed;
+    display: flex;
+    right: 20px;
+    top: 0px;
+    background: transparent;
+    transform: skew(-20deg);
+    padding: 5px;
+    width: auto;
+    max-width: 400px;
+    max-height: 29px;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    .clock {
+        padding: 0px 20px;
+        transform: skew(20deg);
+        text-align: right;
+        color: white;
+        min-width: 100px;
+        text-shadow: 1px 1px black;
+        font-size: 50px;
+    }
+}
+
+.datebox {
+    user-select: none;
+    position: fixed;
+    display: flex;
+    right: 20px;
+    top: 50px;
+    background: transparent;
+    transform: skew(-20deg);
+    padding: 5px;
+    width: auto;
+    max-width: 400px;
+    max-height: 29px;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    .date {
+        padding: 0px 20px;
+        transform: skew(20deg);
+        text-align: right;
+        color: white;
+        min-width: 100px;
+        text-shadow: 1px 1px black;
+        font-size: 20px;
+    }
+}
+
+
+
+.speed {
+    user-select: none;
+    position: fixed;
+    width: 100px;
+    height: 25px;
+    right: 70px;
+    bottom: 500px;
+    text-align: center;
+    transition: 0.2s;
+    border: none;
+    color: @contrast2;
+    text-shadow: 1px 1px black;
+    font-size: 25px;
+}
+
+.km {
+    user-select: none;
+    position: fixed;
+    width: 100px;
+    height: 25px;
+    right: 20px;
+    bottom: 495px;
+    text-align: center;
+    transition: 0.2s;
+    border: none;
+    text-shadow: 1px 1px black;
+    color: white;
+    font-size: 20px;
+}
+.fuel {
+    user-select: none;
+    position: fixed;
+    width: 100px;
+    height: 25px;
+    right: 60px;
+    bottom: 468px;
+    text-align: center;
+    transition: 0.2s;
+    border: none;
+    color: @contrast2;
+    text-shadow: 1px 1px black;
+    font-size: 25px;
+}
+
+.fuelName {
+    user-select: none;
+    position: fixed;
+    width: 100px;
+    height: 25px;
+    right: 20px;
+    bottom: 465px;
+    text-align: center;
+    transition: 0.2s;
+    border: none;
+    text-shadow: 1px 1px black;
+    color: white;
+    font-size: 20px;
+}
+.radioName {
+    user-select: none;
+    position: fixed;
+    width: 300px;
+    height: 25px;
+    right: 100px;
+    bottom: 418px;
+    text-align: center;
+    transition: 0.2s;
+    border: none;
+    color: @contrast2;
+    text-shadow: 1px 1px black;
+    font-size: 25px;
+}
+
+.radio {
+    user-select: none;
+    position: fixed;
+    width: 100px;
+    height: 25px;
+    right: 20px;
+    bottom: 415px;
+    text-align: center;
+    transition: 0.2s;
+    border: none;
+    text-shadow: 1px 1px black;
+    color: white;
+    font-size: 20px;
+}
+
+.playerbox {
+    font-size-adjust: 0.58;
+    user-select: none;
+        position: fixed;
+        width: 100px;
+        height: 25px;
+        right: 80px;
+        bottom: 50px;
+    .playername {
+        user-select: none;
+        position: fixed;
+        width: 100px;
+        height: 25px;
+        right: 60px;
+        bottom: 70px;
+        transition: 0.2s;
+        border: none;
+        text-shadow: 1px 1px black;
+        color: rgb(155, 9, 9);
+        font-size: 20px;
+        font-size-adjust: 0.58;
+    }
+}
+
+
+.notice {
+    user-select: none;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    height: 80%;
+    text-shadow: 1px 1px black;
+    color: white;
+    font-weight: 200;
+    width: 100%;
+    font-size: 32px;
+    user-select: none;
+}
+
+.notifications {
+    position: fixed;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 100%;
+    grid-column-gap: 10px;
+    grid-auto-rows: auto;
+    grid-row-gap: 10px;
+    top: 100px;
+    right: 25px;
+    user-select: none;
+
+    .notification {
+        background: @dark;
+        color: white;
+        width: 300px;
+        padding: 5px;
+        user-select: none;
+    }
+}
+
+.pvp {
+    user-select: none;
+    position: fixed;
+    top: 17.5px;
+
+    svg {
+        width: 35px;
+        height: 35px;
+    }
+}

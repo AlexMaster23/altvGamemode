@@ -121,6 +121,7 @@ function completesteps(player, account)
 
     //DRAW TEXTS
     alt.emitClient(player, 'dmv:displayText');
+    //utility.draw3dText(240, -1379, 33, `Scrie\n[/exam]\npentru a da examenul auto.`, 255, 255, 255, 255);
 
     if(connected == true)
     {

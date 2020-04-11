@@ -6,8 +6,9 @@ console.log("Loaded client->utility->texts.mjs");
 //            x: -66 y: -2437, z:7
 alt.onServer('dmv:displayText', () => {
     console.log("dmv:displayText -> created checkpoints!");
-    const truckergetJob = native.createCheckpoint(45, -67, -2438, 4, -67, -2438, 7, 3, 193, 255, 0, 255, 0);
+    const truckergetJob = native.createCheckpoint(45, -67, -2438, 4, -67, -2438, 7, 3, 193, 255, 0, 255, 0); //240 -1379 33
     native.setCheckpointCylinderHeight(truckergetJob, 4, 6, 3);
+    draw3dText(240, -1379, 34, `Scrie\n[/exam]\npentru a da examenul auto.`, 255, 255, 255, 255);
     //native.setCheckpointCylinderHeight(checkpoint_number, nearHeight_number, farHeight_number, radius_number);
     //native.createCheckpoint(type_number, posX1_number, posY1_number, posZ1_number, posX2_number, posY2_number, posZ2_number, radius_number, red_number, green_number, blue_number, alpha_number, reserved_number);
 });
@@ -19,7 +20,7 @@ function hexToRgb(hex) {
     return [r, g, b];
 }
 
-function drawText3d(msg, posX, posY, posZ, scale, fontType, r, g, b, a, useOutline = true, useDropShadow = true) {
+export function drawText3d(msg, posX, posY, posZ, scale, fontType, r, g, b, a, useOutline = true, useDropShadow = true) {
     const entity = alt.Player.local.vehicle ? alt.Player.local.vehicle.scriptID : alt.Player.local.scriptID;
     const vector = native.getEntityVelocity(entity);
     const frameTime = native.getFrameTime();
@@ -79,4 +80,38 @@ export function drawText2d(
     if (useDropShadow) native.setTextDropShadow();
 
     native.endTextCommandDisplayText(x, y);
+}
+
+
+export function draw3dText(x,y,z, text, r, g, b, a) {
+    const [bol, _x, _y] = native.getScreenCoordFromWorldCoord(x,y,z);
+    const camCord = native.getGameplayCamCoord();
+    const dist = native.getDistanceBetweenCoords(camCord.x,camCord.y,camCord.z, x, y, z, 1)
+
+
+    if (dist > 20) return;
+
+    let scale = (4.00001/dist) * 0.3
+    if (scale > 0.2)
+        scale = 0.2;
+
+
+    const fov = (1/native.getGameplayCamFov())*100;
+	scale = scale*fov;
+  
+    if (bol){
+        native.setTextScale(scale, scale);
+        native.setTextFont(0);
+        native.setTextProportional(true);
+        native.setTextColour(r, g, b, a);
+        native.setTextDropshadow(0, 0, 0, 0, 255);
+        native.setTextEdge(2, 0, 0, 0, 150);
+        native.setTextDropShadow();
+        native.setTextOutline();
+        native.setTextCentre(true);
+        native.beginTextCommandDisplayText("STRING");
+        native.addTextComponentSubstringPlayerName(`${text}`);
+        native.endTextCommandDisplayText(_x,_y + 0.025);
+    }
+
 }

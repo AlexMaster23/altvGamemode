@@ -16,3 +16,4 @@ import * as serverLocations from '/client/systems/serverLocations.mjs';
 import * as jobs from '/client/systems/jobs.mjs';
 import * as trucker from '/client/systems/trucker.mjs';
 import * as checkpointsvdoi from '/client/systems/checkpoints.mjs';
+import * as speedo from '/client/speedo/speedo.mjs';

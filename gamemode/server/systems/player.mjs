@@ -17,26 +17,6 @@ export function addCash(player, value)
         const info = data.find(info => {
             return info;
         });
-        /*if(info.cash >= 999999999999)
-        {
-            chat.sendError(player, `Ai atins limita maxima de bani pe care ii poti detine in mana!`);
-            return;
-        }
-        if(value >= 999999999999)
-        {
-            chat.sendErorr(player, `Nu poti adauga atat de multi bani!`);
-            return;
-        }
-        if(value < 1 || value < 0)
-        {
-            chat.sendError(player, `Nu poti adauga o astfel de suma!`);
-            return;
-        }
-        if(info.cash + value >= 999999999999)
-        {
-            chat.sendError(player, `Nu poti adauga o astfel de suma deoarece trece peste limita maxima!`);
-            return;
-        }*/
         //value
         var total = parseInt(info.cash, 10) + parseInt(value, 10);
         console.log("Player Cash: " + parseInt(info.cash, 10) + " +Value: " + parseInt(value, 10) + " Total: "+ total);
