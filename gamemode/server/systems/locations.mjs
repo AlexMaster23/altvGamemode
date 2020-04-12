@@ -9,6 +9,9 @@ export var langadmv = false;
 export var truckerGetJob = false;
 export var truckerWork = false;
 export var truckerTrailer = false;
+export var fisherFish = false;
+export var fisherGetJob = false;
+export var sellFish = false;
 
 export function update(value)
 {
@@ -23,6 +26,21 @@ export function updateTrucker(value)
 export function updateTruckerWork(value)
 {
     truckerWork = value;
+}
+
+export function updateFisher(value)
+{
+    fisherGetJob = value;
+}
+
+export function updateFisherFish(value)
+{
+    fisherFish = value;
+}
+
+export function updateSellFish(value)
+{
+    sellFish = value;
 }
 
 export function updateTruckerTrailer(value)

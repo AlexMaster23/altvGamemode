@@ -18,6 +18,7 @@ import * as trucker from '/client/systems/trucker.mjs';
 import * as checkpointsvdoi from '/client/systems/checkpoints.mjs';
 import * as speedo from '/client/speedo/speedo.mjs';
 import * as utility from '/client/utility/utility.mjs';
+import * as interiors from '/client/utility/interiors.mjs';
 
 //DISABLE CITY AMBIENT SOUNDS
 native.startAudioScene("FBI_HEIST_H5_MUTE_AMBIENCE_SCENE"); // Used to stop police sound in town

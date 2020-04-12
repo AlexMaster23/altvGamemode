@@ -4,7 +4,8 @@ import * as native from 'natives';
 console.log("Loaded client->utility->events.mjs");
 
 alt.onServer('playerConnected', (playerName) => {
-    alt.log(`You have been connected to server! Welcome ${playerName}!`);
+	alt.log(`You have been connected to server! Welcome ${playerName}!`);
+	alt.emit('load:Interiors');
 });
 
 alt.onServer('updateModel', (model) => {

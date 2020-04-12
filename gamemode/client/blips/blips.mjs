@@ -1,6 +1,6 @@
 import * as alt from 'alt';
 import * as native from 'natives';
-import { DMV, Trucker } from '/client/locations/locations.mjs';
+import * as locations from '/client/locations/locations.mjs';
 alt.log('Loaded: client->blips->blips.mjs');
 
 export function createBlip(category, pos, sprite, color, label, display = 2) {
@@ -20,12 +20,18 @@ export function createBlip(category, pos, sprite, color, label, display = 2) {
     return blip;
 }
 
-DMV.forEach(dmv => {
+locations.DMV.forEach(dmv => {
     createBlip('dmv', dmv, 315, 2, 'DMV');
 });
 
-Trucker.forEach(trucker => {
+locations.Trucker.forEach(trucker => {
     createBlip('trucker', trucker, 67, 57, 'Trucker Job');
 });
 
-//240, 0, 0, 1 
+locations.Fisher.forEach(fisher => {
+    createBlip('fisher', fisher, 68, 57, 'Fisher Job');
+});
+
+locations.sellFish.forEach(sellFish => {
+    createBlip('sellFish', sellFish, 59, 69, 'Cumparator Peste');
+});

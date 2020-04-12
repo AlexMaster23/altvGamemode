@@ -48,15 +48,43 @@ alt.on('entityEnterColshape', (colshape, entity) => {
                 chat.sendJob(entity, `Comenzi disponibile: [/getjob],[/work]`);
                 locations.updateTrucker(true);
             }
+            if(colshape.name === 'Fisher')
+            {
+                chat.sendJob(entity, `Bun venit la job-ul Fisher!`);
+                chat.sendJob(entity, `Comenzi disponibile: [/getjob],[/work],[/fish]`);
+                locations.updateFisher(true);
+            }
             if(colshape.name === 'TruckerWork')
             {
                 if(stat.job == 1)
                 {
                     chat.sendJob(entity, `Pentru a incepe munca scrie /getTruck`);
-                    console.log("CPLM?? " + colshape);
                     locations.updateTruckerWork(true);
                     alt.emit('cp:deleteCheckpoint', player);
                 }
+            }//FisherFish
+            if(colshape.name === 'FisherFish2')
+            {
+                if(stat.job == 2)
+                {
+                    chat.sendJob(entity, `Pentru a incepe munca scrie /fish`);
+                    locations.updateFisherFish(true);
+                    alt.emit('cp:deleteCheckpoint', player);
+                }
+            }
+            if(colshape.name === 'FisherFish')
+            {
+                if(stat.job == 2)
+                {
+                    chat.sendJob(entity, `Pentru a incepe munca scrie /fish`);
+                    locations.updateFisherFish(true);
+                    
+                }
+            }
+            if(colshape.name === 'sellFish')
+            {
+                chat.sendInfo(entity, `Comenzi disponibile: [/buy],[/sellfish]`);
+                locations.updateSellFish(true);
             }
             if(colshape.name === 'TruckerTrailer')
             {
@@ -107,6 +135,18 @@ alt.on('entityLeaveColshape', (colshape, entity) =>
         if(colshape.name === 'Trucker')
         {
             locations.updateTrucker(false);
+        }
+        if(colshape.name === 'Fisher')
+        {
+            locations.updateFisher(false);
+        }
+        if(colshape.name === 'FisherFish' || colshape.name === 'FisherFish2')
+        {
+            locations.updateFisherFish(false);
+        }
+        if(colshape.name === 'sellFish')
+        {
+            locations.updateSellFish(false);
         }
         if(colshape.name === 'TruckerTrailer')
         {

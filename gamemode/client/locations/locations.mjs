@@ -6,7 +6,13 @@ export const Trucker = [
     {x: -66, y: -2437, z:7}
 ]
 
+export const Fisher = [
+    {x:-1845, y: -1196, z:19}
+]
 
+export const sellFish = [
+    {x: -1223, y: -907, z: 12}
+]
 
 /*
 TRUCKER JOB POSTIONS

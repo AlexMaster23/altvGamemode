@@ -29,13 +29,26 @@ chat.registerCmd('exam',(player) => {
         });
     }
 });
+const vehiclePool = [
+    'tailgater',
+    'surge',
+    'stratum',
+    'primo',
+    'emperor',
+    'asterope',
+    'asea',
+    'premier',
+    'ingot',
+    'glendale'
+];
+let randomVehicle = vehiclePool[Math.floor(Math.random() * vehiclePool.length)];
 var tempVeh;
 function startExam(player)
 {
     console.log("DMV exam started!");
     chat.sendInfo(player, `Du-te la masina pentru a incepe examenul auto!`);
     chat.sendInfo(player, `Urmeaza cercurile rosii pentru a completa examenul`);
-    tempVeh = new alt.Vehicle("rhapsody",224, -1378, 30, 0, 0, 3.5);
+    tempVeh = new alt.Vehicle(randomVehicle ,224, -1378, 30, 0, 0, 3.5);
     alt.emitClient(player, 'dmv:startExam', player, checkpointID);
     nextCheckpoint(player);
 }
