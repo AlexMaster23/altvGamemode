@@ -1,23 +1,23 @@
 import * as alt from 'alt';
 import * as native from 'natives';
-
-let webview;
 let url = "http://resource/client/html/speedo/index.html";
-
+let webview;
 let speedoShown = false;
-
 let playerVehicle = false;
 
-
-alt.setInterval(() => {
+alt.everyTick(() => {
     if(!playerVehicle) return;
-    if (speedoShown) {
-        webview.emit('speedo:UpdateSpeed', playerVehicle.speed);
-    }
-}, 1);
+    if(!webview) return;
+       
+    //var speed = playerVehicle.speed;
+       var speed = native.getEntitySpeed(playerVehicle.scriptID);
+       var kmh = (speed * 3.6).toFixed(0);
+       webview.emit('updateSpeed', kmh);
+});
+
+
 alt.onServer('speedo:playerEnterVehicle', (vehicle, seat) => {
     playerVehicle = vehicle;
-    alt.log("speedo:playerentervehicle");
     if(seat == 1)
     {
         if(!speedoShown)
@@ -47,7 +47,8 @@ alt.onServer("speedo:playerChangedVehicleSeat", (vehicle, seat) => {
             speedoShown = true;
         }
     }
-    else{
+    else 
+    {
         webview.destroy();
         speedoShown = false;
     }

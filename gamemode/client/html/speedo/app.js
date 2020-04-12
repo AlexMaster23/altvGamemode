@@ -20,25 +20,19 @@ class App extends Component {
         if ('alt' in window) {
             // HUD
             alt.on('hud:AdjustHud', this.adjustHud.bind(this));
-            alt.on('hud:Hide', this.hide.bind(this));
-            alt.on('speedo:updateSpeed', this.updateSpeed.bind(this));
-            this.updateSpeed(0);
             //alt.on('speedo:updateSpeed', this.updateSpeed.bind(this));
+            alt.on('updateSpeed', this.updateSpeed.bind(this));
         }
     }
 
     updateSpeed(speed)
     {
-        const speedNode = document.getElementById('speed');
+        var speedNode = document.getElementById('speedd');
         if (!speedNode) {
           return;
         }
         
         speedNode.innerText = `${speed}`;
-    }
-
-    hide(value) {
-        this.setState({ hidden: value });
     }
 
     notificationInterval() {
@@ -82,9 +76,9 @@ class App extends Component {
                     style: `right: ${this.state.xOffset + 20}px !important;`
                 },
             ),
-            h('div', {id: 'speed', class: 'speed' }, `999`),
+            h('div', { id: 'speedd', class: 'speed' }, `999`),
             h('div', { class: 'km' }, `KM/H`),
-            h('div', {id: 'fuel', class: 'fuel' }, `99`),
+            h('div', { id: 'fuel', class: 'fuel' }, `99`),
             h('div', { class: 'fuelName' }, `FUEL`),
             /*
             h('div', {id: 'radioName', class: 'radioName' }, `NONE`),

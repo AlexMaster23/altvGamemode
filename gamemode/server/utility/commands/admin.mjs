@@ -49,8 +49,9 @@ chat.registerCmd('veh', (player, arg) => {
 
     try {
         const tempVeh = new alt.Vehicle(arg[0], player.pos.x, player.pos.y, player.pos.z, 0, 0, 0);
+        alt.emitClient(player, 'utility:putPlayerInVehicle', tempVeh);
     } catch (e) {
-        chat.send('Not a valid vehicle model. Must be a plain name. ie. infernus');
+        chat.send(player, 'Not a valid vehicle model. Must be a plain name. ie. infernus');
     }
 });
 
