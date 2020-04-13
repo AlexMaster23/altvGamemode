@@ -12,3 +12,5 @@ var fisherFish = new alt.ColshapeCylinder(-1859, -1242, 8, 3, 4); //-1845.085693
 fisherFish.name = "FisherFish";
 var fisherFish = new alt.ColshapeCylinder(-1223, -907, 12, 3, 4);//-1223 -907 12
 fisherFish.name = "sellFish";
+var Dealership = new alt.ColshapeCylinder(-29, -1105, 26, 3, 4);//-29 -1105 26
+Dealership.name = "Dealership";

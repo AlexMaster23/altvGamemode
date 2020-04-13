@@ -13,6 +13,9 @@ var checkpointActive = false;
 export var working = false;
 var jobTruck;
 var Trailer;
+var pestePrins;
+var numePeste;
+var pretPeste;
 function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -78,7 +81,9 @@ chat.registerCmd('quitjob',(player) => {
             }
             if(info.job == 2)
             {
-                //pierzi pestele
+                pestePrins = null;
+                numePeste = null;
+                pretPeste = null;
             }
             working = false;
         }
@@ -188,9 +193,6 @@ alt.on('trucker:arriveDestination', (player, name) => {
 //-------------------------------/TRUCKER JOB----------------------------
 
 //-------------------------------FISHER JOB----------------------------
-var pestePrins;
-var numePeste;
-var pretPeste;
 chat.registerCmd('fish',(player) => {
     db.selectData('users', ['id', 'username', 'job'], data  => {
         var info = data.find(dbinfo => {

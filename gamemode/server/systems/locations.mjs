@@ -12,6 +12,7 @@ export var truckerTrailer = false;
 export var fisherFish = false;
 export var fisherGetJob = false;
 export var sellFish = false;
+export var atDealership = false;
 
 export function update(value)
 {
@@ -36,6 +37,11 @@ export function updateFisher(value)
 export function updateFisherFish(value)
 {
     fisherFish = value;
+}
+
+export function updateDealership(value)
+{
+    atDealership = value;
 }
 
 export function updateSellFish(value)

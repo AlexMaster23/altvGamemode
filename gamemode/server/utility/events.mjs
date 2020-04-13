@@ -62,7 +62,7 @@ alt.on('entityEnterColshape', (colshape, entity) => {
                     locations.updateTruckerWork(true);
                     alt.emit('cp:deleteCheckpoint', player);
                 }
-            }//FisherFish
+            }
             if(colshape.name === 'FisherFish2')
             {
                 if(stat.job == 2)
@@ -85,6 +85,12 @@ alt.on('entityEnterColshape', (colshape, entity) => {
             {
                 chat.sendInfo(entity, `Comenzi disponibile: [/buy],[/sellfish]`);
                 locations.updateSellFish(true);
+            }
+            if(colshape.name === 'Dealership')
+            {
+                chat.sendInfo(entity, `Bun venit la DealerShip.`);
+                chat.sendInfo(entity, `Comenzi disponibile: [/buycar],[/sellcar]`);
+                locations.updateDealership(true);
             }
             if(colshape.name === 'TruckerTrailer')
             {
@@ -147,6 +153,10 @@ alt.on('entityLeaveColshape', (colshape, entity) =>
         if(colshape.name === 'sellFish')
         {
             locations.updateSellFish(false);
+        }
+        if(colshape.name === 'Dealership')
+        {
+            locations.updateDealership(false);
         }
         if(colshape.name === 'TruckerTrailer')
         {

@@ -40,22 +40,27 @@ export function send(player, msg) {
 }
 
 export function sendInfo(player, msg) {
-  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({00FF48}Info{FFFFFF}) ` + msg);
+  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({00818a}INFO{FFFFFF}) ` + msg);
 }
 export function sendGPS(player, msg) {
   alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({ffc800}GPS{FFFFFF}) ` + msg);
 }
 
 export function sendError(player, msg) {
-  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({FF2200}Error{FFFFFF}) ` + msg);
+  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({FF2200}ERROR{FFFFFF}) ` + msg);
+}
+
+export function sendServer(player, msg)
+{
+  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({00638a}SERVER{FFFFFF}) `)
 }
 
 export function sendAdmin(player, msg) {
-  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({784000}Admin{FFFFFF}) ` + msg);
+  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({784000}ADMIN{FFFFFF}) ` + msg);
 }
 
 export function sendJob(player, msg) {
-  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({0087FF}Job{FFFFFF}) ` + msg);
+  alt.emitClient(player, 'chatmessage', null, `{FFFFFF}({0087FF}JOB{FFFFFF}) ` + msg);
 }
 
 export function broadcast(msg) {

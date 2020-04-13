@@ -14,6 +14,10 @@ export const sellFish = [
     {x: -1223, y: -907, z: 12}
 ]
 
+export const Dealership = [
+    {x:-29, y:-1105, z:26}
+];
+
 /*
 TRUCKER JOB POSTIONS
 

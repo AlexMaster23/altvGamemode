@@ -35,3 +35,7 @@ locations.Fisher.forEach(fisher => {
 locations.sellFish.forEach(sellFish => {
     createBlip('sellFish', sellFish, 59, 69, 'Cumparator Peste');
 });
+
+locations.Dealership.forEach(DS => {
+    createBlip('Dealership', DS, 225, 1, 'Dealership');
+});

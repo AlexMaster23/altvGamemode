@@ -97,11 +97,11 @@ function completesteps(player, account)
 {
     if(account.adminLevel >= 1)
     {
-        chat.sendInfo(player, `You are Admin Level:  ${account.adminLevel}`);
+        chat.sendInfo(player, `You are a level ${account.adminLevel} admin`);
     }
     if(account.helperLevel >= 1)
     {
-        chat.sendInfo(player, `You are Helper Level:  ${account.helperLevel}`);
+        chat.sendInfo(player, `You are a level ${account.helperLevel} admin`);
     }
     if(account.premium == 1)
     {
