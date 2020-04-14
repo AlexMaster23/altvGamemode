@@ -203,6 +203,7 @@ chat.registerCmd('fish',(player) => {
                 if(locations.fisherFish == true)
                 {
                     chat.sendJob(player, `Asteapta sa prinzi un peste!`);
+                    alt.emitClient(player, 'utility:freezePlayer', player, true);
                     alt.setTimeout(() => {
                         pestePrins = randomIntFromInterval(1, 7);
                         if(pestePrins == 1)
@@ -254,8 +255,8 @@ chat.registerCmd('fish',(player) => {
                             chat.sendJob(player, `Ai prins un ${numePeste}!`);
                         }
                         chat.sendJob(player, `Du-te la singurul cumparator de peste din oras pentru a vinde pestele prins!`);
+                        alt.emitClient(player, 'utility:freezePlayer', player, false);
                     }, 5000);
-                    
                     working = true;
                 }
                 else
@@ -284,6 +285,7 @@ chat.registerCmd('sellfish',(player) => {
                     if(pestePrins >= 1)
                     {
                         chat.sendJob(player, `Vanzator: Oh, vrei sa vinzi acest peste?`);
+                        alt.emitClient(player, 'utility:freezePlayer', player, true);
                         alt.setTimeout(() => {
                             chat.sendJob(player, `Vanzator: Ok, sa vedem ce ai aici?`);
                         }, 3000);
@@ -336,6 +338,7 @@ chat.registerCmd('sellfish',(player) => {
                                 chat.sendJob(player, `Ai primit $${pretPeste} pentru acest peste`);
                                 playerFunc.addCash(player, pretPeste);
                             }
+                            alt.emitClient(player, 'utility:freezePlayer', player, false);
                         }, 4000);
                     }
                 }

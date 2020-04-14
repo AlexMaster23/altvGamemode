@@ -32,24 +32,6 @@ export function addBank(player, value)
         const info = data.find(info => {
             return info;
         });
-        /*
-        if(info.bank >= 999999999999999)
-        {
-            chat.sendError(player, `Ai atins limita maxima de bani pe care ii poti detine in mana!`);
-        }
-        if(value >= 999999999999999)
-        {
-            chat.sendErorr(player, `Nu poti adauga atat de multi bani!`);
-        }
-        if(value < 0)
-        {
-            chat.sendError(player, `Nu poti adauga o astfel de suma!`);
-        }
-        if(info.bank + value >= 999999999999999)
-        {
-            chat.sendError(player, `Nu poti adauga o astfel de suma deoarece trece peste limita maxima!`);
-        }*/
-
         var valoare = info.bank + value;
         //chat.sendInfo(player, `Ti-au fost adaugati $${value} in banca`);
         db.updatePartialData(info.id, {bank: valoare}, 'users', res => {});
@@ -62,15 +44,6 @@ export function removeCash(player, value, motiv)
         const info = data.find(info => {
             return info;
         });
-        /*
-        if(value < 0)
-        {
-            chat.sendError(player, `Nu poti retrage o astfel de suma!`);
-        }
-        if(info.cash - value < 0)
-        {
-            chat.sendError(player, `Nu ai destui bani!`);
-        }*/
 
         var valoare = info.cash - value;
         //chat.sendInfo(player, `Ti-au fost luati $${value} din mana pe motiv ${motiv}`);
@@ -84,15 +57,7 @@ export function removeBank(player, value)
     db.selectData('users', ['id', 'username', 'bank'], data  => {
         const info = data.find(info => {
             return info;
-        });/*
-        if(value < 0)
-        {
-            chat.sendError(player, `Nu poti retrage o astfel de suma!`);
-        }
-        if(info.cash - value < 0)
-        {
-            chat.sendError(player, `Nu ai destui bani!`);
-        }*/
+        });
 
         var valoare = info.cash - value;
 
@@ -108,15 +73,6 @@ export function setCash(player, value)
         const info = data.find(info => {
             return info;
         });
-        /*
-        if(value >= 999999999999)
-        {
-            chat.sendErorr(player, `Nu poti adauga atat de multi bani!`);
-        }
-        if(value < 1 || value < 0)
-        {
-            chat.sendError(player, `Nu poti adauga o astfel de suma!`);
-        }*/
 
         db.updatePartialData(info.id, {cash: value}, 'users', res => {});
         //chat.sendInfo(player, `Ti-au fost setati $${value} in mana`);

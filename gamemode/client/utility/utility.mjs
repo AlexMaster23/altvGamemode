@@ -9,6 +9,14 @@ alt.onServer('utility:putPlayerInVehicle', (car) => {
     }, 500);
 });
 
-
-
-//utility:putPlayerInVehicle
+alt.onServer('utility:freezePlayer', (player, state) => {
+    native.freezeEntityPosition(player.scriptID, state);
+    if(state === true)
+    {
+        alt.log("Ai primit freeze");
+    }
+    else
+    {
+        alt.log("Ai primit un freeze");
+    }
+});

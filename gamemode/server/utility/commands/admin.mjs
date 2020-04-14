@@ -16,7 +16,7 @@ chat.registerCmd('set',(player, args) => {
             chat.sendError(player, `Usage: /set < level,skin,cash,bank,adminLevel,helperLevel,premium,premiumPoints,playingtime,faction,truckerSkill,courierSkill,fisherSkill > < value >`);
         }
         //CASES
-        if(args[0] = 'skin')
+        if(args[0] === 'skin')
         {
             try {
                 if(args[1] == null || args[1] == undefined) return chat.sendError(player, `Trebuie sa precizezi un skin!`);
@@ -27,6 +27,20 @@ chat.registerCmd('set',(player, args) => {
                 db.updatePartialData(pdata.id, {playermodel: player.model}, 'users', res => { console.log(`saved player skin! ${player.model}`); });
             } catch(err) {
                 chat.sendAdmin(player, `Acest skin nu exista ${args[1]}!`);
+            }
+        }
+        else if(args[0] === 'level')
+        {
+            try 
+            {
+                if(args[1] == null || args[1] == undefined) return chat.sendError(player, `Syntax: /set level < level >`);
+                pdata.level = args[1];
+                chat.sendAdmin(player, `Ti-ai setat level: ${args[1]}`);
+                db.updatePartialData(pdata.id, {level: args[1]}, 'users', res => {});
+            }
+            catch 
+            {
+                chat.sendAdmin(player, `Eroare la setarea de level!`);
             }
         }
     });
@@ -50,6 +64,7 @@ chat.registerCmd('veh', (player, arg) => {
     try {
         const tempVeh = new alt.Vehicle(arg[0], player.pos.x, player.pos.y, player.pos.z, 0, 0, 0);
         alt.emitClient(player, 'utility:putPlayerInVehicle', tempVeh);
+        tempVeh.setSyncedMeta('engine', false);
     } catch (e) {
         chat.send(player, 'Not a valid vehicle model. Must be a plain name. ie. infernus');
     }
@@ -109,4 +124,39 @@ chat.registerCmd('gotojob',(player, args) => {
             z:19
         }
     }
+});
+
+chat.registerCmd('ah',(player, args) => 
+{
+    if(args[0] === undefined || args[0].length === undefined) return chat.sendError(player, "Syntax: /ah < admin level 1-6 >");
+
+    if(args[0] === '1')
+    {
+        chat.send(player, `Admin 1: /gotojob /tpxyz /veh /up`);   
+    }
+    if(args[0] === '2')
+    {
+        chat.send(player, `Admin 2: `);   
+    }
+    if(args[0] === '3')
+    {
+        chat.send(player, `Admin 3: `);   
+    }
+    if(args[0] === '4')
+    {
+        chat.send(player, `Admin 4: `);   
+    }
+    if(args[0] === '5')
+    {
+        chat.send(player, `Admin 5: `);   
+    }
+    if(args[0] === '6')
+    {
+        chat.send(player, `Admin 6: /set `);   
+    }
+    if(args[0] >= '7') return chat.sendError(player, "Syntax: /ah < admin level 1-6 >");
+});
+
+chat.registerCmd('sstats',(player) => {
+    chat.sendInfo(player, `Player Online:  ${alt.Player.all.length} | Vehicles Spawned: ${alt.Vehicle.all.length}`);
 });

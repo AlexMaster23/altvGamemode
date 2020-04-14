@@ -44,9 +44,11 @@ class App extends Component {
                     this.gotoDMV();
                 }}, 'DMV'),
                 h('br'),
+                h('br'),
                 h('button', {class: 'button', onclick: () => {
                     this.gotoSpawn();
                 }}, 'Spawn'),
+                h('br'),
                 h('br'),
                 h('button', {class: 'button', onclick: () => {
                     
