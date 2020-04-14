@@ -32,11 +32,19 @@ class App extends Component {
         }
     }
 
-    chamHills()
+    MarfaMag()
     {
         if('alt' in window)
         {
-            alt.emit(`trucker:chamHills`);
+            alt.emit(`trucker:MarfaMag`);
+        }
+    }
+
+    Benzina()
+    {
+        if('alt' in window)
+        {
+            alt.emit(`trucker:Benzina`);
         }
     }
 
@@ -54,10 +62,13 @@ class App extends Component {
                 h('br'),
                 h('br'),
                 h('button', {class: 'button', onclick: () => {
-                    this.chamHills();
-                }}, 'Chamberlain Hills'),
+                    this.MarfaMag();
+                }}, 'Marfa Magazine'),
                 h('br'),
-
+                h('br'),
+                h('button', {class: 'button', onclick: () => {
+                    this.Benzina();
+                }}, 'Marfa Magazine'),
             ),
         );
     }

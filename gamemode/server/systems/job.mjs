@@ -167,11 +167,22 @@ alt.onClient('trucker:mazeBank', (player) => {
     console.log("Trailer Spawned!");
 });
 
-alt.onClient('trucker:chamHills', (player) => {
-    var Trailer = new alt.Vehicle("trailers2", -137, -2408, 5, 0, 0, 2);
+alt.onClient('trucker:MarfaMag', (player) => {
+    Trailer = new alt.Vehicle('tvtrailer', -137, -2408, 5, 0, 0, 2);
     alt.emitClient(player, 'job:attachTrailer', jobTruck, Trailer, 100);
+    alt.emit('cp:createCheckpoint', player, 45, 84, -1621, 29, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Delivery Destination', 'MarfaMagCol');
+    //x: 84.0791244506836 / y: -1621.5428466796875 / z:29.5831298828125
     console.log("Trailer Spawned!");
 });
+
+alt.onClient('trucker:Benzina', (player) => {
+    Trailer = new alt.Vehicle('tanker', -137, -2408, 5, 0, 0, 2);
+    alt.emitClient(player, 'job:attachTrailer', jobTruck, Trailer, 100);
+    alt.emit('cp:createCheckpoint', player, 45, -65, -1744, 29, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Delivery Destination', 'BenzinaCol');
+    //x: 89.81538391113281 / y: -1619.208740234375 / z:30.4256591796875  
+    console.log("Trailer Spawned!");
+});
+
 alt.on('trucker:arriveDestination', (player, name) => {
     var sumaprimita;
     if(name === 'MazeBank')
@@ -185,7 +196,35 @@ alt.on('trucker:arriveDestination', (player, name) => {
             chat.sendJob(player, `Ai primit $${sumaprimita} pentru aceasta cursa!`);
             chat.sendJob(player, `Du-te inapoi pentru a alege o alta cursa!`);
             alt.emit('cp:createCheckpoint', player, 45, -137, -2417, 5, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Get Trailer', 'TruckerTrailer');
-            player.addCash(player, sumaprimita);
+            playerFunc.addCash(player, sumaprimita);
+        });
+    }
+    if(name === 'MarfaMagCol')
+    {
+        db.selectData('users', ['id', 'username', 'cash'], data  => {
+            var info = data.find(dbinfo => {
+                return dbinfo;
+            });
+            sumaprimita = randomIntFromInterval(70000, 100000);
+            Trailer.destroy();
+            chat.sendJob(player, `Ai primit $${sumaprimita} pentru aceasta cursa!`);
+            chat.sendJob(player, `Du-te inapoi pentru a alege o alta cursa!`);
+            alt.emit('cp:createCheckpoint', player, 45, -137, -2417, 5, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Get Trailer', 'TruckerTrailer');
+            playerFunc.addCash(player, sumaprimita);
+        });
+    }
+    if(name === 'BenzinaCol')
+    {
+        db.selectData('users', ['id', 'username', 'cash'], data  => {
+            var info = data.find(dbinfo => {
+                return dbinfo;
+            });
+            sumaprimita = randomIntFromInterval(100000, 150000);
+            Trailer.destroy();
+            chat.sendJob(player, `Ai primit $${sumaprimita} pentru aceasta cursa!`);
+            chat.sendJob(player, `Du-te inapoi pentru a alege o alta cursa!`);
+            alt.emit('cp:createCheckpoint', player, 45, -137, -2417, 5, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Get Trailer', 'TruckerTrailer');
+            playerFunc.addCash(player, sumaprimita);
         });
     }
 });
@@ -354,14 +393,13 @@ chat.registerCmd('sellfish',(player) => {
 FISH SELLLER ACTOR POSITION
 x: -1222.07470703125 / y: -908.4659423828125 / z:12.3121337890625
 rotx: 0 / roty: 0 / z: -0.49473902583122253
-*/
 
-//-------------------------------/FISHER JOB----------------------------
-/*
-//FISH GETJOB
-x: -1845.085693359375 / y: -1196.21533203125 / z:19.169921875
-rotx: 0 / roty: 0 / z: 0.24736951291561127
-//FISH /FISH
-x: -1859.3802490234375 / y: -1242.791259765625 / z:8.6051025390625
-rotx: 0 / roty: 0 / z: -2.4736950397491455
+
+
+//TRUCKER LOCATION2
+x: 89.81538391113281 / y: -1619.208740234375 / z:30.4256591796875
+rotx: 0 / roty: 0 / z: -1.9789561033248901
+//TRUCKER LOCATION3
+x: -65.69670104980469 / y: -1744.918701171875 / z:29.6505126953125
+rotx: 0 / roty: 0 / z: 0.7915824055671692
 */

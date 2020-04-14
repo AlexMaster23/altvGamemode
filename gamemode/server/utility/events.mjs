@@ -113,6 +113,30 @@ alt.on('entityEnterColshape', (colshape, entity) => {
                     return;
                 }
             }
+            if(colshape.name === 'MarfaMagCol')
+            {
+                if(working === true)
+                {
+                    alt.emit('trucker:arriveDestination',player, 'MarfaMagCol');
+                    alt.emit('cp:deleteCheckpoint', player);
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if(colshape.name === 'BenzinaCol')
+            {
+                if(working === true)
+                {
+                    alt.emit('trucker:arriveDestination',player, 'BenzinaCol');
+                    alt.emit('cp:deleteCheckpoint', player);
+                }
+                else
+                {
+                    return;
+                }
+            }
             if(colshape.name === 'CheckpointColshape')
             {
                 chat.sendInfo(entity, `Ai ajuns la checkpoint!`);

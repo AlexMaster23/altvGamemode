@@ -9,7 +9,8 @@ alt.onServer('trucker:ShowTrailerDialog', () => {
     webview = new alt.WebView(url);
     webview.on('trucker:close', close);
     webview.on('trucker:mazeBank', mazeBank);
-    webview.on(`trucker:chamHills`, chamHills);
+    webview.on(`trucker:MarfaMag`, MarfaMag);
+    webview.on(`trucker:Benzina`, Benzina);
     webview.focus();
     alt.showCursor(true);
 });
@@ -50,8 +51,14 @@ function mazeBank()
     close();
 }
 
-function chamHills()
+function MarfaMag()
 {
-    alt.emitServer('trucker:chamHills');
+    alt.emitServer('trucker:MarfaMag');
+    close();
+}
+
+function Benzina()
+{
+    alt.emitServer('trucker:Benzina');
     close();
 }
