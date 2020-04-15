@@ -124,6 +124,11 @@ chat.registerCmd('gotojob',(player, args) => {
             z:19
         }
     }
+    if(args[0] == 3)
+    {
+        chat.sendInfo(player, `Ai fost teleportat la job-ul Car Demolisher`);
+        player.pos = {x: -440, y: -1694, z:19}
+    }
 });
 
 chat.registerCmd('ah',(player, args) => 

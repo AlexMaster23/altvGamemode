@@ -9,13 +9,13 @@ console.log("Loaded server->systems->job.mjs");
 const db = new SQL();
 
 //playerstats
-var checkpointActive = false;
 export var working = false;
 var jobTruck;
 var Trailer;
 var pestePrins;
 var numePeste;
 var pretPeste;
+var CarDemolish;
 function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -38,7 +38,7 @@ chat.registerCmd('getjob',(player) => {
             }
             if(info.job > 1)
             {
-                return chat.sendError(player, `Ai deja un job , trebuie sa dai /quitjob Prima data!`);
+                return chat.sendError(player, `Ai deja un job, trebuie sa dai /quitjob prima data!`);
             }
         }
         if(locations.fisherGetJob == true) 
@@ -54,7 +54,23 @@ chat.registerCmd('getjob',(player) => {
             }
             if(info.job > 2)
             {
-                return chat.sendError(player, `Ai deja un job , trebuie sa dai /quitjob Prima data!`);
+                return chat.sendError(player, `Ai deja un job, trebuie sa dai /quitjob prima data!`);
+            }
+        }
+        if(locations.carDemGetJob == true)
+        {
+            if(info.job == 0)
+            {
+                chat.sendJob(player, `Acum muncesti la job-ul Car Demolisher`);
+                db.updatePartialData(info.id, {job: 3}, 'users', res => {});
+            }
+            if(info.job == 3)
+            {
+                return chat.sendError(player, `Ai deja job-ul de Car Demolisher`);
+            }
+            if(info.job > 3)
+            {
+                return chat.sendError(player, `Ai deja un job, trebuie sa dai /quitjob prima data`)
             }
         }
     });
@@ -85,6 +101,10 @@ chat.registerCmd('quitjob',(player) => {
                 numePeste = null;
                 pretPeste = null;
             }
+            if(info.job == 3)
+            {
+                CarDemolish.destroy();
+            }
             working = false;
         }
         else{
@@ -109,7 +129,8 @@ chat.registerCmd('work',(player) => {
                     chat.sendJob(player, `Ti-am pus un checkpoint la locul deunde trebuie sa incepi munca!`);
                     alt.emit('cp:createCheckpoint', player, 45, -31, -2412, 5, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Work Place', 'TruckerWork');
                 }
-                else{
+                else
+                {
                     chat.sendJob(player, `Esti deja la locul deunde trebuie sa incepi munca!`);
                 }
             }
@@ -117,11 +138,24 @@ chat.registerCmd('work',(player) => {
             {
                 if(locations.fisherFish == false)
                 {
-                    chat.sendJob(player, `Ti-am pus un checkpoint la locul deunde poti pescuii`);
+                    chat.sendJob(player, `Ti-am pus un checkpoint la locul deunde poti pescuii!`);
                     alt.emit('cp:createCheckpoint', player, 45, -1859, -1242, 8, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Fish Place', 'FisherFish2');
                 }
-                else{
+                else
+                {
                     chat.sendJob(player, `Esti deja la locul unde poti pescuii!`);
+                }
+            }
+            if(info.job == 3)
+            {
+                if(locations.carDemWork == false)
+                {
+                    chat.sendJob(player, `Ti-am pus un checkpoint la locul deunde poti incepe munca!`);
+                    alt.emit('cp:createCheckpoint', player, 45, -460, -1716, 18, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Work Place', 'CarDemolish');
+                }
+                else
+                {
+                    chat.sendJob(player, `Esti deja la locul unde poti incepe munca!`);
                 }
             }
         } 
@@ -237,12 +271,16 @@ chat.registerCmd('fish',(player) => {
         var info = data.find(dbinfo => {
             return dbinfo;
         });
+        if(working == true) return chat.sendError(player, `Deja lucrezi la un job! Tasteaza [/quitjob] pentru a anula!`);
+        if(working == false)
+        {
             if(info.job == 2)
             {
                 if(locations.fisherFish == true)
                 {
                     chat.sendJob(player, `Asteapta sa prinzi un peste!`);
                     alt.emitClient(player, 'utility:freezePlayer', player, true);
+                    working = true;
                     alt.setTimeout(() => {
                         pestePrins = randomIntFromInterval(1, 7);
                         if(pestePrins == 1)
@@ -295,8 +333,8 @@ chat.registerCmd('fish',(player) => {
                         }
                         chat.sendJob(player, `Du-te la singurul cumparator de peste din oras pentru a vinde pestele prins!`);
                         alt.emitClient(player, 'utility:freezePlayer', player, false);
+                        working = false;
                     }, 5000);
-                    working = true;
                 }
                 else
                 {
@@ -307,6 +345,7 @@ chat.registerCmd('fish',(player) => {
             {
                 return;
             }
+        }
     });
 });
 
@@ -393,13 +432,144 @@ chat.registerCmd('sellfish',(player) => {
 FISH SELLLER ACTOR POSITION
 x: -1222.07470703125 / y: -908.4659423828125 / z:12.3121337890625
 rotx: 0 / roty: 0 / z: -0.49473902583122253
+*/
 
+//-------------------------------Car Demolisher JOB----------------------------
 
+//-------------------------------/Car Demolisher JOB----------------------------
+var demolishCar;
+const demolishCarPool = [
+    'dilettante',
+    'blista',
+    'asbo',
+    'prairie',
+    'blade',
+    'buccaneer',
+    'chino',
+    'clique',
+    'dominator',
+    'impaler',
+    'emperor2',
+    'glendale',
+    'ingot',
+    'intruder',
+    'premier',
+    'primo',
+    'primo2',
+    'stanier',
+    'tailgater',
+    'warrener',
+    'washington',
+];
+var test = false;
+var Player;
+let randomVehicle = demolishCarPool[Math.floor(Math.random() * demolishCarPool.length)];
+chat.registerCmd('startDemolish',(player) => {
+    db.selectData('users', ['id', 'username', 'job'], data  => {
+        var info = data.find(dbinfo => {
+            return dbinfo;
+        });
+        if(working == true) return chat.sendError(player, `Deja lucrezi la un job! Tasteaza [/quitjob] pentru a anula!`);
+        if(working == false)
+        {
+            if(info.job != 3) return chat.sendError(player, `Nu ai job-ul de Car Demolisher!`);
+            if(info.job == 3)
+            {
+                working = true;
+                alt.emitClient(player, 'cardem:setupJobCinematic', player);
+                player.pos = {
+                    x:-442,
+                    y:-1672,
+                    z:19
+                }
+                player.rot = {
+                    x: 0,
+                    y: 0,
+                    z: 2.67
+                }
+                alt.emitClient(player, 'utility:freezePlayer', player, true);
+                chat.send(player, 'Ghita: Oh, daca esti aici inseamna ca esti in cautare de distractie');
+                alt.setTimeout(() => {
+                    chat.send(player, 'Ghita: Daca este asa ... iti voi da o masina care va trebuii sa o distrugi in ce mod vrei');
+                },2000);
+                alt.setTimeout(() => {
+                    chat.send(player, 'Ghita: Cand ai distrus masina o poti aduce la mine pentru a fii platit');
+                },6000);
+                alt.setTimeout(() => {
+                    chat.send(player, 'Ghita: Dar trebuie sa ai grija sa nu explodezi ca nu vei fii platit!');
+                },10000);
+                alt.setTimeout(() => {
+                    chat.send(player, 'Ghita: Acum du-te la masina si distreaza-te!');
+                },14000);
+                alt.setTimeout(() => {
+                    alt.emitClient(player, 'cardem:removeJobCinematic', player);
+                    chat.send(player, `remove job camera!`);
+                    alt.emitClient(player, 'utility:freezePlayer', player, false);
+                    player.pos = {
+                        x:-460,
+                        y:-1716,
+                        z:18
+                    }
+                    demolishCar = new alt.Vehicle(randomVehicle, -455, -1720, 18, 0, 0, 0.54);
+                    chat.send(player, `hmm!`);
+                    chat.send(player, `Body Health: ${demolishCar.bodyHealth} Engine Health ${demolishCar.engineHealth}`);
+                    test = true;
+                    Player = player;
+                },18000);
+            }
+        }
+    });
+});
 
-//TRUCKER LOCATION2
-x: 89.81538391113281 / y: -1619.208740234375 / z:30.4256591796875
-rotx: 0 / roty: 0 / z: -1.9789561033248901
-//TRUCKER LOCATION3
-x: -65.69670104980469 / y: -1744.918701171875 / z:29.6505126953125
-rotx: 0 / roty: 0 / z: 0.7915824055671692
+chat.registerCmd('testdmg',(player) => {
+    chat.send(player, `Body Health: ${demolishCar.bodyHealth} Engine Health ${demolishCar.engineHealth}`);
+});
+
+alt.everyTick(() => {
+    //if(demolishCar != undefined || demolishCar != null) return;
+    if(test == true)
+    {
+        if(demolishCar.engineHealth <= 100)
+        {
+            alt.emit('cardem:Finish', Player);
+        }
+    }
+    else
+    {
+        return;
+    }
+});
+
+alt.on('cardem:Finish', (player) => {
+    chat.sendJob(player, `Du-te la Ghita pentru a fii rasplatit!`);
+    alt.emit('cp:createCheckpoint', player, 45, -455, -1720, 18, 5, 240, 0, 0, 255, 4, 8, false, 128, 6, 'Deliver Car', 'DemolishCar');
+    test = false;
+});
+
+alt.on('cardem:Payoff', (player) => {
+    var recompensa = randomIntFromInterval(50000, 100000);
+    chat.sendJob(player, `Ghita: Ai facut o munca grozava!`);
+    chat.sendJob(player, `Ai primit $${recompensa} pentru munca depusa!`);
+    demolishCar.destroy();
+    working = false;
+    playerFunc.addCash(recompensa);
+});
+
+chat.registerCmd('damagecar',(player) => {
+    chat.sendJob(player, `Ti-am avariat masina!`);
+    demolishCar.engineHealth = 102;
+    demolishCar.bodyHealth = 150;
+});
+
+/*
+PASII pentru car dem
+
+/startDemolish -> Seteaza pozitia camerei -> Seteaza pozitia jucatorului -> creeaza actor -> dialog -> sterge camera -> sterge
+
+//CAR DEM ACTOR POS
+x: -441.8901062011719 / y: -1673.98681640625 / z:19.018310546875
+rotx: 0 / roty: 0 / z: -0.3957912027835846
+//CAR DEM PLAYER POS
+x: -442.5362548828125 / y: -1672.5098876953125 / z:19.018310546875
+rotx: 0 / roty: 0 / z: 2.622116804122925
 */

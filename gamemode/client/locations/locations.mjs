@@ -18,6 +18,10 @@ export const Dealership = [
     {x:-29, y:-1105, z:26}
 ];
 
+export const CarDemolisher = [
+    {x: -440, y:-1693, z:19}
+]
+
 /*
 TRUCKER JOB POSTIONS
 
@@ -32,6 +36,5 @@ rotx: 0 / roty: 0 / z: 0.692634642124176
 //GET REMORCA
 x: -137.6835174560547 / y: -2417.076904296875 / z:5.993408203125
 rotx: 0 / roty: 0 / z: -2.8694863319396973
-
 
 */

@@ -49,6 +49,7 @@ function startExam(player)
     chat.sendInfo(player, `Du-te la masina pentru a incepe examenul auto!`);
     chat.sendInfo(player, `Urmeaza cercurile rosii pentru a completa examenul`);
     tempVeh = new alt.Vehicle(randomVehicle ,224, -1378, 30, 0, 0, 3.5);
+    alt.emitClient(player, 'utility:putPlayerInVehicle', tempVeh);
     alt.emitClient(player, 'dmv:startExam', player, checkpointID);
     nextCheckpoint(player);
 }

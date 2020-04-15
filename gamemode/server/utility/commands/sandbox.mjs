@@ -2,7 +2,6 @@ import * as alt from 'alt';
 import * as chat from 'chat';
 console.log("Loaded server->utility->commands->sandbox.mjs");
 
-
 /*
 //TRUCKER LOCATION2
 x: 89.81538391113281 / y: -1619.208740234375 / z:30.4256591796875

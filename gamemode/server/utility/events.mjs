@@ -11,6 +11,7 @@ const db = new SQL();
 alt.on('playerConnect', (player) => {
     chat.sendInfo(player, `Welcome to the server ${player.name},please login or register`);
     alt.emitClient(player, 'playerConnected', player.name);
+    chat.setupPlayer(player);
 });
 
 alt.on('playerDisconnect', (player) => {
@@ -53,6 +54,12 @@ alt.on('entityEnterColshape', (colshape, entity) => {
                 chat.sendJob(entity, `Bun venit la job-ul Fisher!`);
                 chat.sendJob(entity, `Comenzi disponibile: [/getjob],[/work],[/fish]`);
                 locations.updateFisher(true);
+            }
+            if(colshape.name === 'CarDem')
+            {
+                chat.sendJob(entity, `Bun venit la job-ul Car Demolisher!`);
+                chat.sendJob(entity, `Comenzi disponibile: [/getjob],[/work]`);
+                locations.updateCarDem(true);
             }
             if(colshape.name === 'TruckerWork')
             {
@@ -98,6 +105,23 @@ alt.on('entityEnterColshape', (colshape, entity) => {
                 {
                     alt.emitClient(entity, 'trucker:ShowTrailerDialog');
                     locations.updateTruckerTrailer(true);
+                    alt.emit('cp:deleteCheckpoint', player);
+                }
+            }
+            if(colshape.name === 'CarDemolish')
+            {
+                if(stat.job == 3)
+                {
+                    chat.sendJob(entity, `Pentru a incepe munca scrie /startDemolish`);
+                    locations.updateCarDemWork(true);
+                    alt.emit('cp:deleteCheckpoint', player);
+                }
+            }
+            if(colshape.name === 'DemolishCar')
+            {
+                if(stat.job == 3)
+                {
+                    alt.emit('cardem:Payoff', player);
                     alt.emit('cp:deleteCheckpoint', player);
                 }
             }
@@ -170,6 +194,10 @@ alt.on('entityLeaveColshape', (colshape, entity) =>
         {
             locations.updateFisher(false);
         }
+        if(colshape.name === 'CarDem')
+        {
+            locations.updateCarDem(false);
+        }
         if(colshape.name === 'FisherFish' || colshape.name === 'FisherFish2')
         {
             locations.updateFisherFish(false);
@@ -186,6 +214,10 @@ alt.on('entityLeaveColshape', (colshape, entity) =>
         {
             alt.emitClient(entity, 'trucker:CloseTrailerDialog');
             locations.updateTruckerTrailer(false);
+        }
+        if(colshape.name === 'CarDemolish')
+        {
+            locations.updateCarDemWork(false);
         }
     }
 
